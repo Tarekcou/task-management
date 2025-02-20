@@ -12,8 +12,19 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const gooleSignIn = () => {
-    return signInWithPopup(auth, provider);
+  const signInWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      console.log("User signed in:", result.user);
+
+      // ✅ Notify the parent window
+      if (window.opener) {
+        window.opener.postMessage("auth_success", "*");
+        setTimeout(() => window.close(), 500); // 🔥 Delay closing the window
+      }
+    } catch (error) {
+      console.error("Sign-in error:", error);
+    }
   };
 
   useEffect(() => {
@@ -31,7 +42,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const authInfo = {
-    gooleSignIn,
+    signInWithGoogle,
     user,
     setUser,
   };
