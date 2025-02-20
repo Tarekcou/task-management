@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
-    <div className="mx-auto w-8/12">
+    <div className="mx-auto">
       <Outlet />
     </div>
   );

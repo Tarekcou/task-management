@@ -33,6 +33,7 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     gooleSignIn,
     user,
+    setUser,
   };
 
   return (

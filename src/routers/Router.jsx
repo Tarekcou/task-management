@@ -4,7 +4,6 @@ import MainLayout from "../Layout/MainLayout";
 import Home from "../pages/Home/Home";
 import Sign from "../pages/SignInPage/Sign";
 import PrivateRouter from "./PrivateRouter";
-import "../App.css";
 
 const router = createBrowserRouter([
   {
