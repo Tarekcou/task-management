@@ -1,9 +1,10 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
-import Home from "../pages/Home/Home";
 import Sign from "../pages/SignInPage/Sign";
 import PrivateRouter from "./PrivateRouter";
+import HomePage from "../pages/Home/Home";
+import HomePage2 from "../pages/Home/Home2";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
         path: "", // ✅ Corrected path
         element: (
           <PrivateRouter>
-            <Home />
+            <HomePage />
           </PrivateRouter>
         ),
       },

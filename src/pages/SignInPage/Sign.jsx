@@ -3,33 +3,40 @@ import { FaGoogle } from "react-icons/fa6";
 // import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import { AuthContext } from "../../provider/AuthProvider";
+import { useLocation, useNavigate } from "react-router-dom";
+// import Lottie from "lottie-react";
+import signInLottie from "../../assets/sign.json";
+import "@lottiefiles/lottie-player";
 
 const Sign = () => {
-  const { signInWithGoogle, setUser } = useContext(AuthContext);
+  const { gooleSignIn, setUser } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/"; // Default to home if no redirect
+
   const signIn = () => {
-    signInWithGoogle()
+    gooleSignIn()
       .then((result) => {
         const user = result.user;
         setUser(user);
         console.log(user);
+
+        navigate(from, { replace: true }); // 🔥 Redirect to the previous page or home
       })
       .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        // credentialFromError(error);
-        // ...
+        console.error("Login Error:", error.message);
       });
   };
   return (
-    <div className="flex md:flex-row flex-col gap-10 mx-auto my-10 w-8/12">
-      <div className="flex flex-col justify-around w-1/2">
-        <h1 className="text-5xl">Todo List</h1>
+    <div className="flex md:flex-row flex-col gap-10 mx-auto py-20 w-8/12 min-h-[100vh]">
+      <div className="flex flex-col justify-between w-1/2">
+        <div>
+          <h1 className="font-bold text-5xl">Todo List</h1>
+        </div>
 
         <div className="flex flex-col gap-10">
           {/* Sign In Form */}
-          <h1 className="text-3xl">Sign In</h1>
+          <h1 className="font-bold text-3xl">Log In</h1>
 
           <button
             onClick={signIn}
@@ -43,23 +50,12 @@ const Sign = () => {
 
       {/* Lottie */}
       <div className="flex flex-col justify-end w-1/2">
-        {/* <DotLottieReact
-          src="https://lottie.host/2b8326f0-06cf-45c4-823b-304231c708c6/RoJW1OgDz6.lottie"
-          loop
-          autoplay
-        /> */}
-
-        <Player
+        <lottie-player
           autoplay
           loop
-          src="https://assets3.lottiefiles.com/packages/lf20_UJNc2t.json"
-          style={{ height: "300px", width: "300px" }}
-        >
-          <Controls
-            visible={true}
-            buttons={["play", "repeat", "frame", "debug"]}
-          />
-        </Player>
+          mode="normal"
+          src="https://lottie.host/bac1c12a-9bf1-433f-9307-61388827aa5c/vQCnomjpIJ.json"
+        ></lottie-player>
       </div>
     </div>
   );

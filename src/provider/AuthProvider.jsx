@@ -11,27 +11,19 @@ import { auth } from "../firebase/firebase.config";
 export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isLoading, setLoading] = useState(true);
 
-  const signInWithGoogle = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      console.log("User signed in:", result.user);
-
-      // ✅ Notify the parent window
-      if (window.opener) {
-        window.opener.postMessage("auth_success", "*");
-        setTimeout(() => window.close(), 500); // 🔥 Delay closing the window
-      }
-    } catch (error) {
-      console.error("Sign-in error:", error);
-    }
+  const gooleSignIn = () => {
+    return signInWithPopup(auth, provider);
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
+        // console.log(user);
         setUser(user);
+        setLoading(false);
       } else {
         // User is signed out
         // ...
@@ -42,9 +34,10 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const authInfo = {
-    signInWithGoogle,
+    gooleSignIn,
     user,
     setUser,
+    isLoading,
   };
 
   return (
