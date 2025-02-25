@@ -78,7 +78,7 @@ Authentication:
 
 User authentication and session management are implemented using Firebase.
 
-API Endpoints
+##API Endpoints
 GET /projects: Fetch all projects of a user.
 GET /tasks/:project: Fetch tasks for a specific project.
 POST /projects: Add a new project.
@@ -86,7 +86,7 @@ POST /tasks: Add a new task.
 PUT /tasks/:id: Update task details.
 DELETE /tasks/:id: Delete a task.
 
-Future Enhancements
+##Future Enhancements
 User authentication can be expanded to support JWT for security.
 Task filtering and sorting improvements can be implemented.
 User-specific notifications and reminders for tasks.
