@@ -12,7 +12,7 @@ const Sign = () => {
   const { gooleSignIn, setUser } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname || "/"; // Default to home if no redirect
+  const from = location.state?.from?.pathname || "/home"; // Default to home if no redirect
 
   const signIn = () => {
     gooleSignIn()

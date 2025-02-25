@@ -5,6 +5,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 
@@ -12,9 +13,18 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setLoading] = useState(true);
-
   const gooleSignIn = () => {
     return signInWithPopup(auth, provider);
+  };
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {
+        setUser(null);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -38,6 +48,8 @@ const AuthProvider = ({ children }) => {
     user,
     setUser,
     isLoading,
+    logOut,
+    setLoading,
   };
 
   return (

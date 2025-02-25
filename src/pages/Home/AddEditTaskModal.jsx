@@ -13,7 +13,7 @@ const AddEditTaskModal = ({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("To-Do");
-  const [project, setProject] = useState(projects[0]?.id || "");
+  const [project, setProject] = useState(selectedProject || "");
   const [loading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);
   useEffect(() => {
@@ -41,6 +41,7 @@ const AddEditTaskModal = ({
     }
 
     const newTask = {
+      _id: task?._id,
       title,
       description,
       category,

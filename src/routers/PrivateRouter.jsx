@@ -13,7 +13,7 @@ const PrivateRouter = ({ children }) => {
   // if (isLoading) return <Loading />;
   if (user && user.email) return children;
 
-  return <Navigate state={location.pathname} to={"/login"}></Navigate>;
+  return <Navigate state={location.pathname} to={"/home"}></Navigate>;
 };
 
 export default PrivateRouter;
